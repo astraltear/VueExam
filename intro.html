@@ -1,0 +1,67 @@
+<html>
+    <body>
+        <div id="app">
+            <h1> {{  msg  }}</h1>
+            <h1> {{  $data  }}</h1>
+            <input v-model="msg">
+            <br><br>
+            gender: <input v-model="gender"><br>
+            name: <input v-model="name"><br>
+
+            <br><br><br><br>
+
+            <div v-if="gender==='F'">miss {{name}}</div>
+            <div v-if="gender==='M'">mr {{name}}</div>
+            
+            <br><br><br><br>
+
+            <li v-for = " i in 11">
+                {{ i }} times {{ i * 4 }}
+            </li>
+
+            <br><br><br><br>
+
+            <li v-for = " s in stories">
+                    {{s.plot}}  ||  {{s.writer}} 
+            </li>
+            <br><br><br><br>
+
+            <li v-for = " ( value, key) in stories">
+                 {{key}}  || {{value.plot}} || {{value.writer}} 
+            </li>
+            <br><br><br><br>
+            
+            <button v-on:click="upvote">votes {{ votes }}</button>
+
+        </div>
+    </body>
+    <script src="./vue.js"></script>
+    <script>
+
+        var str_array =  [
+            {plot:"i crash", writer : "alex"},
+            {plot:"yes", writer :"john"},
+            {plot:"yes", writer :"smith"}
+        ]; 
+
+        var data = { 
+            msg : "greeting vue!!!!",
+            gender :"",
+            name : "",
+            stories : str_array,
+            votes : 0
+            };
+
+        new Vue({
+            el:'#app',
+            data: data,
+
+            methods: {
+                upvote : function () {
+                    this.votes++;
+                }
+            },
+        })
+    </script>
+
+</html>

@@ -1,0 +1,71 @@
+<html>
+    <body>
+        <div id="app">
+            <li v-for="story in storieBy('alex')">
+                    {{story.writer}} || {{story.plot}}|| {{story.vote}}
+            </li>
+            <br><br>
+            <li v-for="story in storieBy('john')">
+                {{story.writer}} || {{story.plot}}|| {{story.vote}}
+            </li>
+            <br><br>
+            <h1>{{famous.length }}</h1>
+            <li v-for="story in famous">
+                {{story.writer}} || {{story.plot}}|| {{story.vote}}
+            </li>
+
+            <br><br>
+            <input v-model="query">
+            <h1>{{search.length }}</h1>
+            <li v-for="story in search">
+                {{story.writer}} || {{story.plot}}|| {{story.vote}}
+            </li>
+            <div>{{$data}}</div>
+        </div>    
+    </body>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data : {
+                stories :[
+                    {plot:"i car", writer : "alex", vote:34},
+                    {plot:"yesterday", writer :"john", vote:54},
+                    {plot:"are my", writer :"john", vote:4},
+                    {plot:"at some", writer :"alex", vote:84}
+                ],
+                query:''
+            },
+            
+            methods: {
+                storieBy :function(writer){
+                    return this.stories.filter(
+                        function(story){
+                            return story.writer === writer;
+                        }
+                    )
+                }
+            },
+
+            computed : {
+                    famous: function(){
+                        return this.stories.filter(
+                            function(it){
+                                return it.vote >4;
+                            }
+                        )
+                    },
+                    search: function(){
+                        var query = this.query
+
+                        return this.stories.filter(
+                            function(it){
+                                return it.plot.includes(query)
+                            }
+                        )
+                    }
+            }
+        });
+    </script>
+
+</html>
