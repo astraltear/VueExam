@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="i in fruits" >{{i}} </li>
+        </ul>
+        <div>
+            <button v-on:click="sayHello">confirm</button>
+        </div>
+        <div>
+            <input type="number" name="price" v-model="price">
+        </div>
+        <div>{{reservedTitle}}</div>
+        <div>{{supplyAmt}}</div>
+
+        <div><input type="text" name="inverse" v-model="inversetxt"></div>
+        <div><input type="text" name="reverse" v-model="reversetxt"></div>
+          
+          
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data () {
+            return {  
+                    fruits : [1,2,3,4,5], 
+                    price:10000,
+                    inversetxt :'',
+                    reversetxt : '' 
+                }
+        },
+        methods : {
+            sayHello : function(){
+                alert(this.fruits)
+            }
+        },
+        /*
+
+        computed 프로퍼티는 data 객체 내 프로퍼티에 변화가 발생할 때마다 반응하도록 설정
+
+        reservedTitle function에서 
+        let temp = this.price; 이 부분이 없으면 해당 함수는 계속 호출되지 않는다. 
+        */
+        computed : {
+            reservedTitle : function () {
+                console.log("reservedTitle");
+                let temp = this.price;
+                return "computed actived".split('').reverse().join('')   +Math.random();
+            },
+            supplyAmt : function () {
+                console.log("supplyAmt");
+                return (this.price/11) * 10 ;
+            }
+        },
+        /*
+         watch 프로퍼티는 data 객체 내의 데이터를 모니터링할 수 있으며, 특정 데이터에 변화가 발생하면 후속 처리를 한다.
+
+
+        */
+        watch : {
+            inversetxt : function(val){
+                this.inversetxt = val;
+                this.reversetxt = val.split('').reverse().join('');
+            },
+            reversetxt : function(val){
+                this.reversetxt = val;
+                this.inversetxt = val.split('').reverse().join('');
+            }
+        },
+        beforeCreate() { console.log('beforeCreate')  },
+        created() { console.log('created')  },
+        beforeMount() {   console.log('beforeMount') },
+        mounted() {  console.log('mounted') },
+        beforeUpdate()  {  console.log('beforeUpdate') },
+        updated() { console.log('updated')  },
+        destroyed() {  console.log('destroyed')  },
+    })
+</script>
