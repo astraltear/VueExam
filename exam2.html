@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="i in fruits" >{{i}} </li>
+        </ul>
+        <div>
+            <button v-on:click="sayHello">confirm</button>
+        </div>
+        <div>
+            <input type="number" name="price" v-model="price">
+        </div>
+        <div>{{reservedTitle}}</div>
+        <div>{{supplyAmt}}</div>
+          
+          
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data () {
+            return {  fruits : [1,2,3,4,5], price:10000 }
+        },
+        methods : {
+            sayHello : function(){
+                alert(this.fruits)
+            }
+        },
+        computed : {
+            reservedTitle : function () {
+                console.log("reservedTitle");
+                let temp = this.price;
+                return "computed actived"+Math.random();
+            },
+            supplyAmt : function () {
+                console.log("supplyAmt");
+                return (this.price/11) * 10 ;
+            }
+        }
+        
+    })
+</script>
